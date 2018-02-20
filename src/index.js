@@ -9,9 +9,11 @@ import registerServiceWorker from './registerServiceWorker';
 
 class Sensor {
   constructor(store){
-    extendObservable(this, {
-      maxCount: store.datapointsCount,
-    })
+    this.store = store;
+  }
+
+  get maxCount() {
+    return this.store.datapointsCount;
   }
 }
 
