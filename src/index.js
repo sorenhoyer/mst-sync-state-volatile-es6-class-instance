@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { types } from 'mobx-state-tree';
+import { types, getParent } from 'mobx-state-tree';
 import { observable, extendObservable } from 'mobx';
 import { Provider, observer, inject } from 'mobx-react';
 import './index.css';
@@ -19,7 +19,8 @@ const SettingsStore = types.model({
   datapointsCount: (types.number, 20),
 }).actions(self => ({
   updateDatapointsCount(n){
-    self.datapointsCount = n
+    self.datapointsCount = n;
+    console.log(getParent(self).sensors.values()) // just to make sure it's not a rendering issue in the App component
   }
 }))
 
