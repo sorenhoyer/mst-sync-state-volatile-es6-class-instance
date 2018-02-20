@@ -8,9 +8,9 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 class Sensor {
-  constructor(maxCount){
+  constructor(store){
     extendObservable(this, {
-      maxCount: maxCount,
+      maxCount: store.datapointsCount,
     })
   }
 }
@@ -32,12 +32,12 @@ const RootStore = types.model({
 }))
 .actions(self => ({
   afterCreate(){
-    self.sensors.set('sensor1', new Sensor(self.settings.datapointsCount))
+    self.sensors.set('sensor1', new Sensor(self.settings))
     console.log(self.sensors.values())
   }
 }))
 
-const store = RootStore.create({})
+const store = RootStore.create()
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
