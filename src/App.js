@@ -16,6 +16,9 @@ class App extends React.Component {
       <div>
         <p>store.settings.datapointsCount: {store.settings.datapointsCount}</p>
         <p>store.sensors.get('sensor1').maxCount: {store.sensors.get('sensor1').maxCount}</p>
+        { store.settings.datapointsCount !== store.sensors.get('sensor1').maxCount &&
+          <p style={{color:'red'}}>Out of sync</p>
+        }
       </div>
     )
   }
